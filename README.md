@@ -1,4 +1,4 @@
 # testLogingPanelApp
 TEST Application on Swift
-Design created by storyard
+Design created by storyboard
 For storing data user Core Data
