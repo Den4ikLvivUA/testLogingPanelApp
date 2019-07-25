@@ -34,14 +34,22 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonTouched(_ sender: Any) {
         print("Login button touched!")
-        
+        PersistenceManager.shared.addNewUser(login: "961235555", password: "test")
         DispatchQueue.main.async {
             PersistenceManager.shared.changeLoggedStatus(status: PersistenceManager.shared.checkAuth(login: self.numberField.text!, password: self.passwordField.text!), login: self.numberField.text!)
             print(PersistenceManager.shared.checkLogin())
         }
         if PersistenceManager.shared.checkLogin() {
             performSegue(withIdentifier: "userVC", sender: nil)
-        }        
+        }
+        else {
+            let vc = UIAlertController(title: "Помилка", message: "Невірно введені дані", preferredStyle: .actionSheet)
+            let action = UIAlertAction(title: "Ок", style: .cancel) { (alert) in
+                print("Показано алерт!")
+            }
+            
+            vc.addAction(action)
+        }
     }
     
     //Value in login field changed!
