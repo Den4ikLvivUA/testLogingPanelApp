@@ -23,12 +23,13 @@ class UserViewController: UIViewController {
     @IBOutlet weak var userSecondName: UILabel!
     @IBOutlet weak var userEmail: UILabel!
     @IBOutlet weak var userIDLabel: UILabel!
-    
+    @IBOutlet weak var exitButton: UIBarButtonItem!
     @IBOutlet weak var activityController: UIActivityIndicatorView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        exitButton.isEnabled = true
         activityController.isHidden = false
         activityController.hidesWhenStopped = true
         activityController.startAnimating()
@@ -62,7 +63,9 @@ class UserViewController: UIViewController {
         guard let users = try!PersistenceManager.shared.context.fetch(User.fetchRequest()) as? [User]
             else { return }
         print(users.count)
+        PersistenceManager.shared.deleteUser()
         PersistenceManager.shared.save()
+        performSegue(withIdentifier: "exitToLoginVC", sender: nil)
     }
 }
 

@@ -60,8 +60,8 @@ final class PersistenceManager {
     //******************************
     
     func changeLoggedStatus(status: Bool, login: String) {
-        let entity = NSEntityDescription.entity(forEntityName: "User", in: PersistenceManager.shared.context)
-        let userObject = NSManagedObject(entity: entity!, insertInto: PersistenceManager.shared.context) as! User
+        let entity = NSEntityDescription.entity(forEntityName: "User", in: context)
+        let userObject = NSManagedObject(entity: entity!, insertInto: context) as! User
         let fetchRequest = NSFetchRequest<User>(entityName: "User")
         fetchRequest.predicate = NSPredicate(format: "login == %@", login)
         userObject.isLogged = status
@@ -75,7 +75,7 @@ final class PersistenceManager {
         let fetchRequest = NSFetchRequest<User>(entityName: "User")
         fetchRequest.predicate = NSPredicate(format: "isLogged == %i", true)
         do {
-            user = try PersistenceManager.shared.context.fetch(fetchRequest)
+            user = try context.fetch(fetchRequest)
             print("USERS matched = \(user.count)")
             if user.count > 0 {
                 return true
@@ -88,11 +88,11 @@ final class PersistenceManager {
     }
     
     func addNewUser(login: String, password: String){
-        let entity = NSEntityDescription.entity(forEntityName: "User", in: PersistenceManager.shared.context)
-        let userObject = NSManagedObject(entity: entity!, insertInto: PersistenceManager.shared.context) as! User
+        let entity = NSEntityDescription.entity(forEntityName: "User", in: context)
+        let userObject = NSManagedObject(entity: entity!, insertInto: context) as! User
         userObject.login = login
         userObject.password = password
-        PersistenceManager.shared.save()
+        save()
         print("USER ADDED!")
     }
     
@@ -101,7 +101,7 @@ final class PersistenceManager {
         let fetchRequest = NSFetchRequest<User>(entityName: "User")
         fetchRequest.predicate = NSPredicate(format: "login == %@ AND password == %@", login, password)
         do {
-            user = try PersistenceManager.shared.context.fetch(fetchRequest)
+            user = try context.fetch(fetchRequest)
             print("USERS matched = \(user.count)")
             if user.count > 0 {
                 return true
@@ -114,12 +114,20 @@ final class PersistenceManager {
     }
     
     func printUsers() {
-        guard let users = try! PersistenceManager.shared.context.fetch(User.fetchRequest()) as? [User]
+        guard let users = try! context.fetch(User.fetchRequest()) as? [User]
             else { return }
         users.forEach({ print("Login is \(String(describing: $0.login)) and password is \(String(describing: $0.password)) and ID is \($0.id)")})
         
     }
     
+    
+    func deleteUser() {
+        var user: User
+        guard let entity = NSEntityDescription.entity(forEntityName: "User", in: context) else { return }
+        user = NSManagedObject(entity: entity, insertInto: context) as! User
+        
+        context.delete(user)
+    }
     //******************************
     //******************************
     //MARK :- END OF COREDATA METHODS

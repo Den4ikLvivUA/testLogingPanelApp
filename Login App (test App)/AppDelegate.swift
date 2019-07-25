@@ -18,7 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         print(urls[urls.count - 1] as URL)
-        print("LOGIN IS REQUIRED, status of Logging - \(PersistenceManager.shared.checkLogin())")
+        if (PersistenceManager.shared.checkLogin()){
+            print("Logging isn't required, status of logging - true")}
+        else{
+            print("Logging is REQUIRED, status of logging - false")
+        }
         if (PersistenceManager.shared.checkLogin()){
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "UserVC")

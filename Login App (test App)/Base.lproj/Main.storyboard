@@ -150,7 +150,6 @@
                                             <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="touchedExitButton:" destination="i2K-UA-nSV" id="zaL-xm-DEL"/>
-                                                <segue destination="BYZ-38-t0r" kind="show" id="5m0-6Z-Rw9"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -246,11 +245,13 @@
                     </view>
                     <connections>
                         <outlet property="activityController" destination="k8p-eH-T0B" id="jqn-JV-gZi"/>
+                        <outlet property="exitButton" destination="nBd-S7-7WL" id="pem-48-elF"/>
                         <outlet property="userEmail" destination="nPY-hQ-cxV" id="T2h-Cq-jpy"/>
                         <outlet property="userIDLabel" destination="y3I-hF-aP9" id="jrw-w6-V35"/>
                         <outlet property="userImage" destination="ydf-NI-uZ5" id="AuZ-Zd-O62"/>
                         <outlet property="userName" destination="P7m-vF-ZEE" id="huV-E2-HiJ"/>
                         <outlet property="userSecondName" destination="8uO-Ce-RNP" id="ZyU-j2-ojv"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="exitToLoginVC" id="UZv-fU-B3t"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DTu-Tp-hKK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -296,6 +297,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="5m0-6Z-Rw9"/>
+        <segue reference="UZv-fU-B3t"/>
     </inferredMetricsTieBreakers>
 </document>
