@@ -170,6 +170,9 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="k8p-eH-T0B">
+                                <rect key="frame" x="197" y="338" width="20" height="20"/>
+                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QKq-gY-XDm">
                                 <rect key="frame" x="35" y="528" width="344" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -206,10 +209,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="k8p-eH-T0B">
-                                <rect key="frame" x="197" y="338" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -226,6 +225,7 @@
                             <constraint firstItem="jRe-Ak-iAQ" firstAttribute="trailing" secondItem="y3I-hF-aP9" secondAttribute="trailing" constant="35" id="Rn8-8U-aUu"/>
                             <constraint firstItem="jRe-Ak-iAQ" firstAttribute="trailing" secondItem="8uO-Ce-RNP" secondAttribute="trailing" constant="35" id="TXD-XJ-dP6"/>
                             <constraint firstItem="S8K-sA-wLM" firstAttribute="top" secondItem="QKq-gY-XDm" secondAttribute="bottom" constant="10" id="Wrj-zn-sPC"/>
+                            <constraint firstItem="k8p-eH-T0B" firstAttribute="centerY" secondItem="ydf-NI-uZ5" secondAttribute="centerY" id="YoV-Th-4Ed"/>
                             <constraint firstItem="jRe-Ak-iAQ" firstAttribute="trailing" secondItem="wQz-8U-mWA" secondAttribute="trailing" constant="35" id="Zag-s6-WaN"/>
                             <constraint firstItem="8uO-Ce-RNP" firstAttribute="top" secondItem="P7m-vF-ZEE" secondAttribute="bottom" constant="8" symbolic="YES" id="ZdL-h3-7yN"/>
                             <constraint firstItem="xpX-rW-0sL" firstAttribute="trailing" secondItem="jRe-Ak-iAQ" secondAttribute="trailing" id="buA-ci-gGM"/>
@@ -239,11 +239,13 @@
                             <constraint firstItem="8uO-Ce-RNP" firstAttribute="top" secondItem="QKq-gY-XDm" secondAttribute="bottom" constant="8" symbolic="YES" id="sau-v8-1cV"/>
                             <constraint firstItem="xpX-rW-0sL" firstAttribute="top" secondItem="jRe-Ak-iAQ" secondAttribute="top" id="vTs-ex-pu7"/>
                             <constraint firstItem="ydf-NI-uZ5" firstAttribute="centerX" secondItem="uOZ-zt-Nmf" secondAttribute="centerX" id="wOJ-ol-LfY"/>
+                            <constraint firstItem="k8p-eH-T0B" firstAttribute="centerX" secondItem="ydf-NI-uZ5" secondAttribute="centerX" id="wjV-sM-bZc"/>
                             <constraint firstAttribute="trailing" secondItem="nPY-hQ-cxV" secondAttribute="trailing" constant="35" id="yYO-Hz-FNZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jRe-Ak-iAQ"/>
                     </view>
                     <connections>
+                        <outlet property="activityController" destination="k8p-eH-T0B" id="jqn-JV-gZi"/>
                         <outlet property="userEmail" destination="nPY-hQ-cxV" id="T2h-Cq-jpy"/>
                         <outlet property="userIDLabel" destination="y3I-hF-aP9" id="jrw-w6-V35"/>
                         <outlet property="userImage" destination="ydf-NI-uZ5" id="AuZ-Zd-O62"/>

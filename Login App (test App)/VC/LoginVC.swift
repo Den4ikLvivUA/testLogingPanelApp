@@ -36,12 +36,12 @@ class LoginViewController: UIViewController {
         print("Login button touched!")
         
         DispatchQueue.main.async {
-            PersistenceManager.shared.changeLoggedStatus(status: PersistenceManager.shared.checkAuth(login: "961235555‬", password: "test"), login: "961235555‬")
+            PersistenceManager.shared.changeLoggedStatus(status: PersistenceManager.shared.checkAuth(login: self.numberField.text!, password: self.passwordField.text!), login: self.numberField.text!)
             print(PersistenceManager.shared.checkLogin())
         }
-        
-        performSegue(withIdentifier: "userVC", sender: nil)
-        
+        if PersistenceManager.shared.checkLogin() {
+            performSegue(withIdentifier: "userVC", sender: nil)
+        }        
     }
     
     //Value in login field changed!

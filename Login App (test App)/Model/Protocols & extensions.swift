@@ -23,7 +23,7 @@ protocol UsersDelegate : class  {
 //MARK :- Extension for delegate's job
 
 extension UserViewController : UsersDelegate{
-
+    
     func push(){
         let vc = UserViewController()
         vc.delegate = self
@@ -33,16 +33,16 @@ extension UserViewController : UsersDelegate{
         var tempUserStruct: userStruct?
         print("PARSING DATA..")
         let url = URL(string: urlString)
-            URLSession.shared.dataTask(with: url!){
-                (data, response, error) in
-                guard let data = data else { print("NO DATA!"); completion(nil, nil); return }
-                do{
-                    let user = try JSONDecoder().decode(dataStruct.self, from: data)
-                    tempUserStruct = userStruct(id: user.data!.id, email: user.data!.email, first_name: user.data!.first_name, last_name: user.data!.last_name, avatar: user.data!.avatar)
-                    completion(tempUserStruct, nil)
-                    print("LOADED DATA!!!!")                  
-                }   catch let error { completion( nil, error) }
-                }.resume()
+        URLSession.shared.dataTask(with: url!){
+            (data, response, error) in
+            guard let data = data else { print("NO DATA!"); completion(nil, nil); return }
+            do{
+                let user = try JSONDecoder().decode(dataStruct.self, from: data)
+                tempUserStruct = userStruct(id: user.data!.id, email: user.data!.email, first_name: user.data!.first_name, last_name: user.data!.last_name, avatar: user.data!.avatar)
+                completion(tempUserStruct, nil)
+                print("LOADED DATA!!!!")                  
+            }   catch let error { completion( nil, error) }
+            }.resume()
     }
-        
+    
 }

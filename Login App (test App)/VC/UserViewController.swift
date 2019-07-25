@@ -24,10 +24,14 @@ class UserViewController: UIViewController {
     @IBOutlet weak var userEmail: UILabel!
     @IBOutlet weak var userIDLabel: UILabel!
     
+    @IBOutlet weak var activityController: UIActivityIndicatorView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityController.isHidden = false
+        activityController.hidesWhenStopped = true
+        activityController.startAnimating()
         let vc = LoginViewController()
         let session = URLSession.shared
         vc.delegate = self
@@ -35,7 +39,6 @@ class UserViewController: UIViewController {
             guard let user = user else { print("Nil :("); return }
             DispatchQueue.main.async {
                 print(user)
-                
                 self?.userIDLabel.text = "User id:\(String(user.id))"
                 self?.userName.text = String(user.first_name)
                 self?.userSecondName.text = String(user.last_name)
@@ -45,21 +48,24 @@ class UserViewController: UIViewController {
                     if let data = data, let image = UIImage(data: data){
                         DispatchQueue.main.async {
                             self?.userImage.image = image
+                            self?.activityController.stopAnimating()
+                            self?.activityController.isHidden = true
                         }
                     }
                     }.resume()
+                
             }
         })
     }
     
     @IBAction func touchedExitButton(_ sender: UIBarButtonItem) {
-            guard let users = try!PersistenceManager.shared.context.fetch(User.fetchRequest()) as? [User]
+        guard let users = try!PersistenceManager.shared.context.fetch(User.fetchRequest()) as? [User]
             else { return }
         print(users.count)
         PersistenceManager.shared.save()
-        
     }
 }
+
 
 
 
