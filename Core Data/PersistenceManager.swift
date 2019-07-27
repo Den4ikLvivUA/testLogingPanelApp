@@ -88,12 +88,29 @@ final class PersistenceManager {
     }
     
     func addNewUser(login: String, password: String){
-        let entity = NSEntityDescription.entity(forEntityName: "User", in: context)
-        let userObject = NSManagedObject(entity: entity!, insertInto: context) as! User
-        userObject.login = login
-        userObject.password = password
+        var user: [User]
+        let fetchRequest = NSFetchRequest<User>(entityName: "User")
+        fetchRequest.predicate = NSPredicate(format: "login == %@ AND password == %@", login, password)
+        do {
+            user = try context.fetch(fetchRequest)
+            print("USERS matched = \(user.count)")
+            if user.count == 0 {
+                let entity = NSEntityDescription.entity(forEntityName: "User", in: context)
+                let userObject = NSManagedObject(entity: entity!, insertInto: context) as! User
+                userObject.login = login
+                userObject.password = password
+                print("USER ADDED!")
+            }
+            else {
+                print("Такий юзер вже є!")
+            }
+        } catch {
+            print(error.localizedDescription)
+            
+        }
+        
         save()
-        print("USER ADDED!")
+        
     }
     
     func checkAuth(login: String, password: String) -> Bool {
